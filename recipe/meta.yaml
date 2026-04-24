@@ -7,25 +7,25 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/requests-html-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/requests-html-{{ version }}.tar.gz
   sha256: 7e929ecfed95fb1d0994bb368295d6d7c4d06b03fcb900c33d7d0b17e6003947
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
   run:
     - beautifulsoup4
     - fake-useragent
     - parse
     - pyppeteer >=0.0.14
     - pyquery
-    - python >=3.6
+    - python >={{ python_min }}
     - requests
     - w3lib
 
@@ -36,6 +36,7 @@ test:
     #- pip check #requests-html 0.10.0 requires bs4, which is not installed. will re-enable after new release
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/kennethreitz/requests-html
